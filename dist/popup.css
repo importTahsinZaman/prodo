@@ -1,5 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
 body {
-  width: 600px;
-  height: 500px;
-  background-color: aquamarine;
+  width: 550px;
+  height: 400px;
+
+  background-image: url(https://i.gifer.com/iGu.gif);
+  background-size: 40% 40%;
+
+  font-family: "VT323", monospace;
+}
+
+#room {
+  position: fixed;
+  left: 40px;
+  top: 30px;
+}
+
+#xp_bar {
+  position: fixed;
+  image-rendering: pixelated;
+  background-color: rgb(69, 106, 144);
+  border: solid 2px rgb(140, 180, 221);
+  bottom: 20px;
+  left: 40px;
+  width: 60%;
+  height: 3%;
+  border-radius: 10px;
+}
+
+#xp_status {
+  background-color: rgb(140, 180, 221);
+  width: 20%;
+  height: 100%;
+  z-index: 100;
+}
+
+#computer {
+  position: fixed;
+  bottom: 150px;
+  left: 120px;
+}
+
+#study_button {
+  cursor: pointer;
+  position: fixed;
+  right: 30px;
+  top: 120px;
+  width: 100px;
+  height: 50px;
+}
+
+#study_text {
+  position: fixed;
+  user-select: none;
+  cursor: pointer;
+  right: 55px;
+  top: 115px;
+  width: fit-content;
+  height: 50px;
+  font-weight: 100;
+}
+
+#friends_button {
+  cursor: pointer;
+  position: fixed;
+  right: 30px;
+  top: 170px;
+  width: 100px;
+  height: 50px;
+}
+
+#friends_text {
+  position: fixed;
+  user-select: none;
+  cursor: pointer;
+  right: 46px;
+  top: 165px;
+  width: fit-content;
+  height: 50px;
+  font-weight: 100;
+}
+
+#bag_button {
+  cursor: pointer;
+  position: fixed;
+  right: 30px;
+  top: 220px;
+  width: 100px;
+  height: 50px;
+}
+
+#bag_text {
+  position: fixed;
+  user-select: none;
+  cursor: pointer;
+  right: 65px;
+  top: 215px;
+  width: fit-content;
+  height: 50px;
+  font-weight: 100;
+}
+
+#settings_button {
+  cursor: pointer;
+  position: fixed;
+  right: 30px;
+  top: 270px;
+  width: 100px;
+  height: 50px;
+}
+
+#settings_text {
+  position: fixed;
+  user-select: none;
+  cursor: pointer;
+  right: 42px;
+  top: 265px;
+  width: fit-content;
+  height: 50px;
+  font-weight: 100;
+}
+
+#pet {
+  position: fixed;
+  top: 170px;
+  left: 180px;
+  height: 25%;
+  width: 20%;
+  z-index: 100;
 }

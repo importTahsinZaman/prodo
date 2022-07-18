@@ -8,19 +8,19 @@
   "manifest_version": 3,
   "default_locale": "en",
   "minimum_chrome_version": "88",
-  "permissions": [],
+  "permissions": ["storage"],
   "icons": {
     "128": "assets/img/128x128.png"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["background.js"]
+      "js": ["index.js"]
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["assets/Pets/*.gif"],
+      "resources": ["assets/Pets/*.gif", "*.json"],
       "matches": ["<all_urls>"]
     }
   ],

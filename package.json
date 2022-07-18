@@ -41,12 +41,14 @@
   "xtbuild": {
     "js_bundles": [
       {
-        "name": "background",
+        "name": "index",
         "src": "./src/**/*.js"
       }
     ],
     "copyAsIs": [
-      "./src/*.css"
+      "./src/*.css",
+      "./src/popup.js",
+      "./src/*.json"
     ]
   },
   "dependencies": {
