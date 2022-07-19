@@ -22,7 +22,7 @@ body {
   background-color: rgb(69, 106, 144);
   border: solid 2px rgb(140, 180, 221);
   bottom: 20px;
-  left: 40px;
+  left: 50px;
   width: 60%;
   height: 3%;
   border-radius: 10px;
@@ -30,7 +30,6 @@ body {
 
 #xp_status {
   background-color: rgb(140, 180, 221);
-  width: 20%;
   height: 100%;
   z-index: 100;
 }
@@ -128,4 +127,38 @@ body {
   height: 25%;
   width: 20%;
   z-index: 100;
+}
+
+#name {
+  color: white;
+  position: fixed;
+  user-select: none;
+  left: 60px;
+  bottom: 10px;
+  font-size: 35px;
+  font-weight: 100;
+  width: fit-content;
+}
+
+#level {
+  color: white;
+  position: fixed;
+  user-select: none;
+  right: 180px;
+  bottom: 10px;
+  font-size: 35px;
+  font-weight: 100;
+  width: fit-content;
+}
+
+#xp_progress {
+  color: white;
+  position: fixed;
+  user-select: none;
+  right: 180px;
+  bottom: 10px;
+  font-size: 16px;
+  font-weight: 100;
+  width: fit-content;
+  height: fit-content;
 }

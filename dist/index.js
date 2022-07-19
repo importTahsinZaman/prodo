@@ -498,6 +498,7 @@ const jsConfetti = new js_confetti__WEBPACK_IMPORTED_MODULE_0__["default"]();
 var current_pet = "";
 var current_pet_name = "";
 var current_pet_level = 1;
+var current_pet_xp = 0;
 var current_pet_evo = "evo1";
 var current_pet_gif = "";
 
@@ -508,11 +509,12 @@ async function getData() {
     current_pet = result1.current_pet;
     chrome.storage.sync.get([`${current_pet}`], (result2) => {
       current_pet_level = result2[current_pet].level;
+      current_pet_xp = result2[current_pet].current_xp;
       current_pet_name = result2[current_pet].name;
-      if (current_pet_level >= 30) {
-        current_pet_evo = "evo2";
-      } else if (current_pet_level >= 60) {
+      if (current_pet_level >= 60) {
         current_pet_evo = "evo3";
+      } else if (current_pet_level >= 30) {
+        current_pet_evo = "evo2";
       }
       current_pet_gif = `${current_pet}_${current_pet_evo}`;
     });
@@ -520,6 +522,7 @@ async function getData() {
 }
 
 setTimeout(function () {
+  console.log(current_pet_gif);
   if (window.location.href.includes("https://classroom.google.com/")) {
     const image = document.createElement("img");
     image.src = chrome.runtime.getURL(`assets/Pets/${current_pet_gif}.gif`);
