@@ -1,10 +1,6 @@
 import JSConfetti from "js-confetti";
 
-export var level = 32;
-
-chrome.storage.sync.set({ test: 69 }, function () {
-  console.log("Value is set to " + value);
-});
+const jsConfetti = new JSConfetti();
 
 if (window.location.href.includes("https://classroom.google.com/")) {
   const image = document.createElement("img");
@@ -18,15 +14,18 @@ if (window.location.href.includes("https://classroom.google.com/")) {
 }
 
 document.onclick = function (event) {
-  if (event === undefined) event = window.event;
-
   if (
     event.target.textContent == "Turning in…" &&
     window.location.href.includes("https://classroom.google.com/")
   ) {
     const back = document.getElementsByClassName("NBxL9e")[0];
     back.style.display = "none";
-    const jsConfetti = new JSConfetti();
     jsConfetti.addConfetti();
+
+    var old_xp = 0;
+    chrome.storage.sync.get(["xp"], function (result) {
+      old_xp = result.xp;
+    });
+    chrome.storage.sync.set({ xp: old_xp + 150 });
   }
 };

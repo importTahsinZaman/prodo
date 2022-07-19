@@ -1,4 +1,5 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/js-confetti/dist/es/index.js":
@@ -7,7 +8,6 @@
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -484,25 +484,16 @@ var JSConfetti = /*#__PURE__*/function () {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
-var __webpack_exports__ = {};
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "level": () => (/* binding */ level)
-/* harmony export */ });
 /* harmony import */ var js_confetti__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-confetti */ "./node_modules/js-confetti/dist/es/index.js");
 
 
-var level = 32;
-
-chrome.storage.sync.set({ test: 69 }, function () {
-  console.log("Value is set to " + value);
-});
+const jsConfetti = new js_confetti__WEBPACK_IMPORTED_MODULE_0__["default"]();
 
 if (window.location.href.includes("https://classroom.google.com/")) {
   const image = document.createElement("img");
@@ -516,26 +507,21 @@ if (window.location.href.includes("https://classroom.google.com/")) {
 }
 
 document.onclick = function (event) {
-  if (event === undefined) event = window.event;
-
   if (
     event.target.textContent == "Turning in…" &&
     window.location.href.includes("https://classroom.google.com/")
   ) {
     const back = document.getElementsByClassName("NBxL9e")[0];
     back.style.display = "none";
-    const jsConfetti = new js_confetti__WEBPACK_IMPORTED_MODULE_0__["default"]();
     jsConfetti.addConfetti();
+
+    var old_xp = 0;
+    chrome.storage.sync.get(["xp"], function (result) {
+      old_xp = result.xp;
+    });
+    chrome.storage.sync.set({ xp: old_xp + 150 });
   }
 };
-
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!**********************!*\
-  !*** ./src/popup.js ***!
-  \**********************/
 
 })();
 

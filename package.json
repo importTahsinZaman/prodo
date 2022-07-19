@@ -42,7 +42,11 @@
     "js_bundles": [
       {
         "name": "index",
-        "src": "./src/**/*.js"
+        "src": "./src/**/index.js"
+      },
+      {
+        "name": "popup",
+        "src": "./src/**/popup.js"
       }
     ],
     "copyAsIs": [
