@@ -1,5 +1,7 @@
 import JSConfetti from "js-confetti";
 
+export var level = 32;
+
 chrome.storage.sync.set({ test: 69 }, function () {
   console.log("Value is set to " + value);
 });

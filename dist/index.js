@@ -492,8 +492,13 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "level": () => (/* binding */ level)
+/* harmony export */ });
 /* harmony import */ var js_confetti__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-confetti */ "./node_modules/js-confetti/dist/es/index.js");
 
+
+var level = 32;
 
 chrome.storage.sync.set({ test: 69 }, function () {
   console.log("Value is set to " + value);
