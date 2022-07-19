@@ -68,7 +68,7 @@ document.onclick = function (event) {
     ];
 
     const animationDuration = {
-      duration: 100,
+      duration: 1000,
       iterations: 1,
     };
 
