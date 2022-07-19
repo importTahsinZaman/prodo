@@ -5,7 +5,6 @@ var current_pet_xp = 0;
 var current_pet_evo = "evo1";
 var current_pet_gif = "";
 
-setData();
 getData();
 
 async function getData() {
@@ -61,16 +60,22 @@ function getNeededXp(target_level) {
 
 function setData() {
   chrome.storage.sync.set({ owned_pets: ["f001", "f002"] });
-  chrome.storage.sync.set({ current_pet: "f001" });
+  chrome.storage.sync.set({ current_pet: "f003" });
   chrome.storage.sync.set({
     f001: {
       name: "bruh",
       level: 1,
-      current_xp: 20,
+      current_xp: 0,
       needed_xp: getNeededXp(2),
     },
     f002: {
       name: "bruh2",
+      level: 1,
+      current_xp: 0,
+      needed_xp: getNeededXp(2),
+    },
+    f003: {
+      name: "bruh3",
       level: 1,
       current_xp: 0,
       needed_xp: getNeededXp(2),
