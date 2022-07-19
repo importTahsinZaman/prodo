@@ -12,3 +12,20 @@ window.onload = function () {
     }
   });
 };
+
+function getNeededXp(current_level) {
+  return 56 * current_level ** 1.1;
+}
+
+function setData() {
+  chrome.storage.sync.set({ owned_pets: ["f001"] });
+  chrome.storage.sync.set({ current_pet: "f001" });
+  chrome.storage.sync.set({
+    f001: {
+      name: "bruh",
+      level: 1,
+      current_xp: 0,
+      needed_xp: getNeededXp(1),
+    },
+  });
+}
