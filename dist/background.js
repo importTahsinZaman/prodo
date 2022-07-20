@@ -3,26 +3,29 @@ var __webpack_exports__ = {};
 /*!***************************!*\
   !*** ./src/background.js ***!
   \***************************/
-// chrome.storage.sync.set({ test: 1 });
-// setInterval(function () {
-//   chrome.storage.sync.get(["test"], (result) => {
-//     chrome.storage.sync.set({ test: result.test + 1 });
-//     console.log(result.test);
-//   });
-// }, 1000);
+let time = 0; // in seconds
+var testInterval = null; // interval
 
-// const starting_time = 10; // Minutes
-// let time = starting_time * 60;
+function update_timer() {
+  if (time > 0) {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    chrome.storage.sync.set({ test: `${minutes}:${seconds}` });
+    time--;
+  } else {
+    chrome.storage.sync.set({ test: `00:00` });
+    clearInterval(testInterval);
+  }
+}
 
-// setInterval(update_timer, 1000);
-
-// function update_timer() {
-//   const minutes = Math.floor(time / 60);
-//   let seconds = time % 60;
-//   seconds = seconds < 10 ? "0" + seconds : seconds;
-//   time--;
-//   console.log(`${minutes}:${seconds}`);
-// }
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  chrome.storage.sync.get(["test"], (result) => {
+    time = result.test * 60;
+  });
+  testInterval = setInterval(update_timer, 1000);
+  sendResponse({ msg: "started timer" });
+});
 
 /******/ })()
 ;

@@ -106,6 +106,22 @@ function setData() {
   });
 }
 
+chrome.storage.sync.set({ test: 0.2 }, () => {
+  chrome.runtime.sendMessage({ msg: "hello" }, function (response) {
+    console.log(response.msg);
+  });
+});
+
+var read_time = setInterval(function () {
+  chrome.storage.sync.get(["test"], (result) => {
+    console.log(result.test);
+    if (result.test === "00:00") {
+      console.log("done");
+      clearInterval(read_time);
+    }
+  });
+}, 1000);
+
 /******/ })()
 ;
 //# sourceMappingURL=popup.js.map
