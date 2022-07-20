@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!**********************!*\
-  !*** ./src/popup.js ***!
-  \**********************/
 var current_pet = "";
 var current_pet_name = "";
 var current_pet_level = 1;
@@ -63,9 +58,27 @@ function getNeededXp(target_level) {
   return Math.floor(56 * target_level ** 1.1);
 }
 
+setTimeout(function () {
+  document
+    .getElementById("close_popup_button")
+    .addEventListener("click", function () {
+      document.getElementById("study_popup").classList.remove("active");
+      document.getElementById("bg_overlay").classList.remove("active");
+      document.getElementById("close_popup_button").classList.remove("active");
+    });
+
+  document
+    .getElementById("study_button")
+    .addEventListener("click", function () {
+      document.getElementById("study_popup").classList.toggle("active");
+      document.getElementById("bg_overlay").classList.toggle("active");
+      document.getElementById("close_popup_button").classList.toggle("active");
+    });
+}, 100);
+
 function setData() {
   chrome.storage.sync.set({ owned_pets: ["f001", "f002"] });
-  chrome.storage.sync.set({ current_pet: "f003" });
+  chrome.storage.sync.set({ current_pet: "f001" });
   chrome.storage.sync.set({
     f001: {
       name: "bruh",
@@ -87,7 +100,3 @@ function setData() {
     },
   });
 }
-
-/******/ })()
-;
-//# sourceMappingURL=popup.js.map
