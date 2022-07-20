@@ -1,3 +1,8 @@
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**********************!*\
+  !*** ./src/popup.js ***!
+  \**********************/
 var current_pet = "";
 var current_pet_name = "";
 var current_pet_level = 1;
@@ -100,3 +105,7 @@ function setData() {
     },
   });
 }
+
+/******/ })()
+;
+//# sourceMappingURL=popup.js.map

@@ -47,6 +47,10 @@
       {
         "name": "popup",
         "src": "./src/**/popup.js"
+      },
+      {
+        "name": "background",
+        "src": "./src/**/background.js"
       }
     ],
     "copyAsIs": [
