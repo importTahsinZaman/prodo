@@ -123,10 +123,10 @@ body {
 
 #pet {
   position: fixed;
-  top: 170px;
-  left: 180px;
-  height: 25%;
-  width: 20%;
+  top: 130px;
+  left: 145px;
+  height: 45%;
+  width: 35%;
 }
 
 #name {
@@ -244,4 +244,26 @@ body {
   padding-right: 14px;
   border: 2px solid black;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+#study_clock {
+  position: fixed;
+  font-size: 90px;
+  position: fixed;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#task_list {
+  position: fixed;
+  resize: none;
+  font-size: 18px;
+  position: fixed;
+  top: 74%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64%;
+  height: 24%;
+  background-color: #d7e5eb;
 }
