@@ -23,7 +23,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["assets/Pets/*.gif", "*.json"],
+      "resources": ["assets/Pets/*.gif", "helper.js"],
       "matches": ["<all_urls>"]
     }
   ],

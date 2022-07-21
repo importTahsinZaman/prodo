@@ -1,3 +1,5 @@
+import { getNeededXp, setData } from "./helper.js";
+
 import JSConfetti from "js-confetti";
 
 const jsConfetti = new JSConfetti();
@@ -75,30 +77,3 @@ document.onclick = function (event) {
     document.getElementById("xp_message").animate(animation, animationDuration);
   }
 };
-
-function getNeededXp(target_level) {
-  return Math.floor(56 * target_level ** 1.1);
-}
-
-function addXP(xpAmount) {
-  current_pet_xp += xpAmount;
-
-  while (current_pet_xp >= getNeededXp(current_pet_level + 1)) {
-    current_pet_xp = current_pet_xp - getNeededXp(current_pet_level + 1);
-    current_pet_level += 1;
-  }
-
-  chrome.storage.sync.set(
-    {
-      [current_pet]: {
-        name: current_pet_name,
-        level: current_pet_level,
-        current_xp: current_pet_xp,
-        needed_xp: getNeededXp(current_pet_level + 1),
-      },
-    },
-    (r) => {
-      console.log("updated xp");
-    }
-  );
-}

@@ -425,6 +425,54 @@ var JSConfetti = /*#__PURE__*/function () {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (JSConfetti);
 
 
+/***/ }),
+
+/***/ "./src/helper.js":
+/*!***********************!*\
+  !*** ./src/helper.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getNeededXp": () => (/* binding */ getNeededXp),
+/* harmony export */   "setData": () => (/* binding */ setData)
+/* harmony export */ });
+function getNeededXp(target_level) {
+  return Math.floor(56 * target_level ** 1.1);
+}
+
+function setData() {
+  chrome.storage.sync.set({ timer_running: false });
+  chrome.storage.sync.set({ time_remaining: 0 });
+  chrome.storage.sync.set({ timer_paused: false });
+  chrome.storage.sync.set({ timer: 0 });
+
+  chrome.storage.sync.set({ owned_pets: ["f001", "f002", "f003"] });
+  chrome.storage.sync.set({ current_pet: "f002" });
+  chrome.storage.sync.set({
+    f001: {
+      name: "bruh",
+      level: 60,
+      current_xp: 0,
+      needed_xp: getNeededXp(2),
+    },
+    f002: {
+      name: "bruh2",
+      level: 32,
+      current_xp: 0,
+      needed_xp: getNeededXp(2),
+    },
+    f003: {
+      name: "bruh3",
+      level: 1,
+      current_xp: 0,
+      needed_xp: getNeededXp(2),
+    },
+  });
+}
+
+
 /***/ })
 
 /******/ 	});
@@ -490,10 +538,13 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var js_confetti__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-confetti */ "./node_modules/js-confetti/dist/es/index.js");
+/* harmony import */ var _helper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper.js */ "./src/helper.js");
+/* harmony import */ var js_confetti__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-confetti */ "./node_modules/js-confetti/dist/es/index.js");
 
 
-const jsConfetti = new js_confetti__WEBPACK_IMPORTED_MODULE_0__["default"]();
+
+
+const jsConfetti = new js_confetti__WEBPACK_IMPORTED_MODULE_1__["default"]();
 
 var current_pet = "";
 var current_pet_name = "";
@@ -568,33 +619,6 @@ document.onclick = function (event) {
     document.getElementById("xp_message").animate(animation, animationDuration);
   }
 };
-
-function getNeededXp(target_level) {
-  return Math.floor(56 * target_level ** 1.1);
-}
-
-function addXP(xpAmount) {
-  current_pet_xp += xpAmount;
-
-  while (current_pet_xp >= getNeededXp(current_pet_level + 1)) {
-    current_pet_xp = current_pet_xp - getNeededXp(current_pet_level + 1);
-    current_pet_level += 1;
-  }
-
-  chrome.storage.sync.set(
-    {
-      [current_pet]: {
-        name: current_pet_name,
-        level: current_pet_level,
-        current_xp: current_pet_xp,
-        needed_xp: getNeededXp(current_pet_level + 1),
-      },
-    },
-    (r) => {
-      console.log("updated xp");
-    }
-  );
-}
 
 })();
 

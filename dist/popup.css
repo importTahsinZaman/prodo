@@ -123,10 +123,10 @@ body {
 
 #pet {
   position: fixed;
-  top: 130px;
-  left: 145px;
-  height: 45%;
-  width: 35%;
+  top: 100px;
+  left: 155px;
+  height: 40%;
+  width: 30%;
 }
 
 #name {
