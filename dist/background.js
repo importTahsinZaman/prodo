@@ -3,11 +3,13 @@ var __webpack_exports__ = {};
 /*!***************************!*\
   !*** ./src/background.js ***!
   \***************************/
+var icon = null;
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.time) {
-    console.log("Starting Timer for " + request.time + "milliseconds");
+  if (request.command === "set_timer") {
     setTime(request.time);
-  } else {
+    icon = request.icon;
+  } else if (request.command === "stop_timer") {
     chrome.alarms.clear("timer", console.log("cleared alarm"));
   }
 });
@@ -25,7 +27,7 @@ chrome.alarms.onAlarm.addListener(() => {
     "NOTIFICATION_ID",
     {
       type: "basic",
-      iconUrl: "https://picsum.photos/id/237/200/300",
+      iconUrl: chrome.runtime.getURL(icon),
       title: "Prodo - Timer Ended",
       message:
         "The timer has ended, you can start the next part of the study cycle in the Study tab.",

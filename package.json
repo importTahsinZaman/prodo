@@ -57,6 +57,7 @@
       "./src/*.css",
       "./src/popup.js",
       "./src/helper.js",
+      "./src/study_page.js",
       "./src/*.json"
     ]
   },

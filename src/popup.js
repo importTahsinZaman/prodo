@@ -161,7 +161,8 @@ function startTimer(leave_timer) {
       if (!leave_timer)
         chrome.runtime.sendMessage({
           command: "set_timer",
-          time: result.timer_remaining,
+          time: result.time_remaining,
+          icon: chrome.runtime.getURL(`assets/Pets/${current_pet_gif}.gif`),
         });
       chrome.storage.sync.set({ timer: target_time.getTime() });
       updateTimer();
@@ -173,6 +174,7 @@ function startTimer(leave_timer) {
         chrome.runtime.sendMessage({
           command: "set_timer",
           time: time,
+          icon: chrome.runtime.getURL(`assets/Pets/${current_pet_gif}.gif`),
         });
       chrome.storage.sync.set({ timer: target_time.getTime() });
       updateTimer();
@@ -198,7 +200,7 @@ function pauseTimer(leave_timer) {
   chrome.storage.sync.set({ timer_paused: true }, () => {
     document.getElementById("start_pause_button").innerHTML = "START";
     clearInterval(update_timer_interval);
-    if (!leave_timer) chrome.runtime.sendMessage({ command: "stop_timeout" });
+    if (!leave_timer) chrome.runtime.sendMessage({ command: "stop_timer" });
     var now = new Date();
     var time_remaining = target_time - now;
     chrome.storage.sync.set({ time_remaining: time_remaining });
