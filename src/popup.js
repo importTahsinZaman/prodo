@@ -31,14 +31,32 @@ function getData() {
     document.getElementById("task_list").textContent = result.task_list;
   });
   chrome.storage.sync.get(
-    ["timer_running", "timer_paused", "time_remaining"],
+    ["timer_running", "timer_paused", "time_remaining", "break_time"],
     (result) => {
+      break_time = result.break_time;
+      if (break_time) {
+        document.getElementById("study_title").innerHTML = "BREAK";
+        time = 60000;
+      } else {
+        document.getElementById("study_title").innerHTML = "STUDY";
+        time = 60000;
+      }
       if (result.timer_running) {
         loadTimer();
       } else if (result.timer_paused) {
-        document.getElementById("study_clock").innerHTML = Math.floor(
-          result.time_remaining / 1000
-        );
+        var minutes = Math.floor(result.time_remaining / 60000);
+        var seconds = Math.round(result.time_remaining / 1000) % 60;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        document.getElementById(
+          "study_clock"
+        ).innerHTML = `${minutes}:${seconds}`;
+      } else {
+        var minutes = Math.floor(time / 60000);
+        var seconds = Math.round(time / 1000) % 60;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        document.getElementById(
+          "study_clock"
+        ).innerHTML = `${minutes}:${seconds}`;
       }
     }
   );
@@ -79,6 +97,9 @@ function loadUI() {
 
 //Click Events:
 setTimeout(function () {
+  document.getElementById("bag_button").addEventListener("click", () => {
+    setData();
+  });
   document
     .getElementById("close_popup_button")
     .addEventListener("click", function () {
@@ -112,10 +133,11 @@ setTimeout(function () {
     });
 }, 100);
 
-var time = 60000;
+var time = null;
 var target_time = 0;
 var update_timer_interval = null;
 var timer_paused = false;
+var break_time = false;
 
 function loadTimer() {
   document.getElementById("start_pause_button").innerHTML = "PAUSE";
@@ -134,12 +156,20 @@ function startTimer() {
     if (result.timer_paused) {
       var now = new Date();
       target_time = new Date(now.getTime() + result.time_remaining);
+      chrome.runtime.sendMessage({
+        command: "set_timer",
+        time: result.timer_remaining,
+      });
       chrome.storage.sync.set({ timer: target_time.getTime() });
       updateTimer();
       update_timer_interval = setInterval(updateTimer, 1000);
     } else {
       var now = new Date();
       target_time = new Date(now.getTime() + time);
+      chrome.runtime.sendMessage({
+        command: "set_timer",
+        time: time,
+      });
       chrome.storage.sync.set({ timer: target_time.getTime() });
       updateTimer();
       update_timer_interval = setInterval(updateTimer, 1000);
@@ -149,23 +179,23 @@ function startTimer() {
 }
 
 function updateTimer() {
-  // var now = new Date();
-  // document.getElementById("study_clock").innerHTML = Math.floor(
-  //   (target_time - now) / 1000
-  // );
-
   var now = new Date();
   var minutes = Math.floor((target_time - now) / 60000);
   var seconds = Math.round((target_time - now) / 1000) % 60;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  console.log(minutes, seconds);
-  document.getElementById("study_clock").innerHTML = `${minutes}:${seconds}`;
+  if (minutes <= 0 && seconds <= 0) {
+    clearInterval(update_timer_interval);
+    document.getElementById("study_clock").innerHTML = `0:00`;
+  } else {
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    document.getElementById("study_clock").innerHTML = `${minutes}:${seconds}`;
+  }
 }
 
 function pauseTimer() {
   chrome.storage.sync.set({ timer_paused: true }, () => {
     document.getElementById("start_pause_button").innerHTML = "START";
     clearInterval(update_timer_interval);
+    chrome.runtime.sendMessage({ command: "stop_timeout" });
     var now = new Date();
     var time_remaining = target_time - now;
     chrome.storage.sync.set({ time_remaining: time_remaining });

@@ -51,15 +51,12 @@
       {
         "name": "background",
         "src": "./src/**/background.js"
-      },
-      {
-        "name": "helper",
-        "src": "./src/**/helper.js"
       }
     ],
     "copyAsIs": [
       "./src/*.css",
       "./src/popup.js",
+      "./src/helper.js",
       "./src/*.json"
     ]
   },

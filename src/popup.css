@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
+html {
+  width: 550px;
+  height: 400px;
+}
+
 body {
   width: 550px;
   height: 400px;
