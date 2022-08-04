@@ -2,6 +2,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.time) {
     console.log("Starting Timer for " + request.time + "milliseconds");
     setTime(request.time);
+  } else {
+    chrome.alarms.clear("timer", console.log("cleared alarm"));
   }
 });
 
@@ -19,8 +21,9 @@ chrome.alarms.onAlarm.addListener(() => {
     {
       type: "basic",
       iconUrl: "https://picsum.photos/id/237/200/300",
-      title: "notification title",
-      message: "notification message",
+      title: "Prodo - Timer Ended",
+      message:
+        "The timer has ended, you can start the next part of the study cycle in the Study tab.",
       priority: 2,
     },
     () => {

@@ -36,10 +36,10 @@ function getData() {
       break_time = result.break_time;
       if (break_time) {
         document.getElementById("study_title").innerHTML = "BREAK";
-        time = 60000;
+        time = break_amount;
       } else {
         document.getElementById("study_title").innerHTML = "STUDY";
-        time = 60000;
+        time = study_amount;
       }
       if (result.timer_running) {
         loadTimer();
@@ -126,13 +126,15 @@ setTimeout(function () {
     .getElementById("start_pause_button")
     .addEventListener("click", function () {
       if (document.getElementById("start_pause_button").innerHTML == "START") {
-        startTimer();
+        startTimer(false);
       } else {
-        pauseTimer();
+        pauseTimer(false);
       }
     });
 }, 100);
 
+const study_amount = 32000;
+const break_amount = 30000;
 var time = null;
 var target_time = 0;
 var update_timer_interval = null;
@@ -149,27 +151,29 @@ function loadTimer() {
   });
 }
 
-function startTimer() {
+function startTimer(leave_timer) {
   document.getElementById("start_pause_button").innerHTML = "PAUSE";
   chrome.storage.sync.set({ timer_running: true });
   chrome.storage.sync.get(["timer_paused", "time_remaining"], (result) => {
     if (result.timer_paused) {
       var now = new Date();
       target_time = new Date(now.getTime() + result.time_remaining);
-      chrome.runtime.sendMessage({
-        command: "set_timer",
-        time: result.timer_remaining,
-      });
+      if (!leave_timer)
+        chrome.runtime.sendMessage({
+          command: "set_timer",
+          time: result.timer_remaining,
+        });
       chrome.storage.sync.set({ timer: target_time.getTime() });
       updateTimer();
       update_timer_interval = setInterval(updateTimer, 1000);
     } else {
       var now = new Date();
       target_time = new Date(now.getTime() + time);
-      chrome.runtime.sendMessage({
-        command: "set_timer",
-        time: time,
-      });
+      if (!leave_timer)
+        chrome.runtime.sendMessage({
+          command: "set_timer",
+          time: time,
+        });
       chrome.storage.sync.set({ timer: target_time.getTime() });
       updateTimer();
       update_timer_interval = setInterval(updateTimer, 1000);
@@ -183,22 +187,37 @@ function updateTimer() {
   var minutes = Math.floor((target_time - now) / 60000);
   var seconds = Math.round((target_time - now) / 1000) % 60;
   if (minutes <= 0 && seconds <= 0) {
-    clearInterval(update_timer_interval);
-    document.getElementById("study_clock").innerHTML = `0:00`;
+    switchBreak();
   } else {
     seconds = seconds < 10 ? "0" + seconds : seconds;
     document.getElementById("study_clock").innerHTML = `${minutes}:${seconds}`;
   }
 }
 
-function pauseTimer() {
+function pauseTimer(leave_timer) {
   chrome.storage.sync.set({ timer_paused: true }, () => {
     document.getElementById("start_pause_button").innerHTML = "START";
     clearInterval(update_timer_interval);
-    chrome.runtime.sendMessage({ command: "stop_timeout" });
+    if (!leave_timer) chrome.runtime.sendMessage({ command: "stop_timeout" });
     var now = new Date();
     var time_remaining = target_time - now;
     chrome.storage.sync.set({ time_remaining: time_remaining });
     chrome.storage.sync.set({ timer_running: false });
   });
+}
+
+function switchBreak() {
+  clearInterval(update_timer_interval);
+  document.getElementById("study_clock").innerHTML = `0:00`;
+
+  if (document.getElementById("study_title").innerHTML == "BREAK") {
+    document.getElementById("study_title").innerHTML = "STUDY";
+    time = study_amount;
+  } else {
+    document.getElementById("study_title").innerHTML = "BREAK";
+    time = break_amount;
+  }
+
+  startTimer(true);
+  pauseTimer(true);
 }

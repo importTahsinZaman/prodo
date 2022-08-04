@@ -10,17 +10,17 @@ export function setData() {
   chrome.storage.sync.set({ break_time: false });
 
   chrome.storage.sync.set({ owned_pets: ["f001", "f002", "f003"] });
-  chrome.storage.sync.set({ current_pet: "f002" });
+  chrome.storage.sync.set({ current_pet: "f001" });
   chrome.storage.sync.set({
     f001: {
       name: "bruh",
-      level: 60,
+      level: 61,
       current_xp: 0,
       needed_xp: getNeededXp(2),
     },
     f002: {
       name: "bruh2",
-      level: 32,
+      level: 62,
       current_xp: 0,
       needed_xp: getNeededXp(2),
     },
