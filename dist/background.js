@@ -27,7 +27,7 @@ chrome.alarms.onAlarm.addListener(() => {
     "NOTIFICATION_ID",
     {
       type: "basic",
-      iconUrl: chrome.runtime.getURL(icon),
+      iconUrl: "https://picsum.photos/200/300",
       title: "Prodo - Timer Ended",
       message:
         "The timer has ended, you can start the next part of the study cycle in the Study tab.",
@@ -35,9 +35,12 @@ chrome.alarms.onAlarm.addListener(() => {
     },
     () => {
       chrome.alarms.clear("timer", console.log("cleared alarm"));
+      chrome.storage.sync.set({ switch_break: true });
     }
   );
 });
+
+// chrome.action.setPopup({ popup: "./game.html" });
 
 /******/ })()
 ;

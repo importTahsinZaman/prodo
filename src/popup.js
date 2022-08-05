@@ -31,7 +31,13 @@ function getData() {
     document.getElementById("task_list").textContent = result.task_list;
   });
   chrome.storage.sync.get(
-    ["timer_running", "timer_paused", "time_remaining", "break_time"],
+    [
+      "timer_running",
+      "timer_paused",
+      "time_remaining",
+      "break_time",
+      "switch_break",
+    ],
     (result) => {
       break_time = result.break_time;
       if (break_time) {
@@ -57,6 +63,9 @@ function getData() {
         document.getElementById(
           "study_clock"
         ).innerHTML = `${minutes}:${seconds}`;
+      }
+      if (result.switch_break) {
+        switchBreak();
       }
     }
   );
@@ -97,12 +106,30 @@ function loadUI() {
 
 //Click Events:
 setTimeout(function () {
+  document.getElementById("computer").addEventListener("click", () => {
+    document.getElementById("game_popup").classList.toggle("active");
+    document.getElementById("bg_overlay").classList.toggle("active");
+    document.getElementById("close_popup_button").classList.toggle("active");
+    if (
+      break_time &&
+      document.getElementById("start_pause_button").innerHTML == "PAUSE"
+    ) {
+      document.getElementById("game_popup_message").innerHTML =
+        "REOPEN THE EXTENSION POPUP TO START GAMING";
+    } else {
+      document.getElementById("game_popup_message").innerHTML =
+        "YOU CAN ONLY GAME WHILE THE BREAK TIMER IS RUNNING";
+    }
+  });
   document.getElementById("bag_button").addEventListener("click", () => {
-    setData();
+    chrome.alarms.get("timer", (alarm) => {
+      console.log(alarm.scheduledTime - Date.now());
+    });
   });
   document
     .getElementById("close_popup_button")
     .addEventListener("click", function () {
+      document.getElementById("game_popup").classList.remove("active");
       document.getElementById("study_popup").classList.remove("active");
       document.getElementById("bg_overlay").classList.remove("active");
       document.getElementById("close_popup_button").classList.remove("active");
@@ -188,12 +215,8 @@ function updateTimer() {
   var now = new Date();
   var minutes = Math.floor((target_time - now) / 60000);
   var seconds = Math.round((target_time - now) / 1000) % 60;
-  if (minutes <= 0 && seconds <= 0) {
-    switchBreak();
-  } else {
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-    document.getElementById("study_clock").innerHTML = `${minutes}:${seconds}`;
-  }
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  document.getElementById("study_clock").innerHTML = `${minutes}:${seconds}`;
 }
 
 function pauseTimer(leave_timer) {
@@ -222,4 +245,7 @@ function switchBreak() {
 
   startTimer(true);
   pauseTimer(true);
+
+  break_time = !break_time;
+  chrome.storage.sync.set({ break_time: break_time });
 }

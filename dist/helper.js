@@ -8,6 +8,7 @@ export function setData() {
   chrome.storage.sync.set({ timer_paused: false });
   chrome.storage.sync.set({ timer: 0 });
   chrome.storage.sync.set({ break_time: false });
+  chrome.storage.sync.set({ switch_break: false });
 
   chrome.storage.sync.set({ owned_pets: ["f001", "f002", "f003"] });
   chrome.storage.sync.set({ current_pet: "f001" });

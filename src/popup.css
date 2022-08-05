@@ -41,6 +41,7 @@ body {
 }
 
 #computer {
+  cursor: pointer;
   position: fixed;
   bottom: 150px;
   left: 120px;
@@ -271,4 +272,22 @@ body {
   width: 64%;
   height: 24%;
   background-color: #d7e5eb;
+}
+
+#game_popup {
+  display: none;
+  position: fixed;
+  user-select: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: white;
+  width: 400px;
+  height: 400px;
+}
+
+#game_popup.active {
+  display: block;
 }
