@@ -20,12 +20,12 @@ As the user completes assignments on a platform such as Google Classroom, their 
 |:--:|
 | <b>Confetti and XP Gain on Google Classroom assignment submission</b>|
 
-#Installation instructions
+# Installation instructions
 
 1. Clone repo
 2. Go to extensions manager in chrome and enable developer mode
 3. Click "Load Unpacked" (top left) , select the prodo folder, select the "dist" subfolder
 
-#Current Status
+# Current Status
 
 Unfortunately, due to time constraints, the development of Prodo has been put on pause. I plan on resuming development in Summer of 2023 when school is out.
