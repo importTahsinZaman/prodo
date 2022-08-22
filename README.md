@@ -16,3 +16,7 @@ Pomodoro timer and tasklist
 
 ![alt text](https://i.imgur.com/P53crNN.png)
 Confetti/XP Gain on Google Classroom assingment submission
+
+| ![space-1.jpg](https://blog-assets.thedyrt.com/uploads/2019/01/shutterstock_1033306540-1.jpg) |
+|:--:|
+| <b>Image Credits - Fig.2 - 4K Mountains Wallpaper</b>|
