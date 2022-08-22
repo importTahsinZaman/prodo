@@ -122,9 +122,7 @@ setTimeout(function () {
     }
   });
   document.getElementById("bag_button").addEventListener("click", () => {
-    chrome.alarms.get("timer", (alarm) => {
-      console.log(alarm.scheduledTime - Date.now());
-    });
+    setData();
   });
   document
     .getElementById("close_popup_button")

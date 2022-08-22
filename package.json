@@ -57,6 +57,9 @@
       "./src/*.css",
       "./src/popup.js",
       "./src/helper.js",
+      "./src/game.js",
+      "./src/game.html",
+      "./src/game.css",
       "./src/*.json"
     ]
   },

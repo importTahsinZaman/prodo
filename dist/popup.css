@@ -140,8 +140,8 @@ body {
   position: fixed;
   user-select: none;
   left: 60px;
-  bottom: 10px;
-  font-size: 35px;
+  bottom: 14px;
+  font-size: 28px;
   font-weight: 100;
   width: fit-content;
 }
@@ -151,8 +151,8 @@ body {
   position: fixed;
   user-select: none;
   right: 180px;
-  bottom: 10px;
-  font-size: 35px;
+  bottom: 14px;
+  font-size: 28px;
   font-weight: 100;
   width: fit-content;
 }
