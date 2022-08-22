@@ -4,7 +4,7 @@ Prodo is a chrome extension built to help students stay productive by building a
 
 As the user completes assignments on a platform such as Google Classroom, their pet, AKA Prodo, gains xp and eventually levels up and evolves. Students can also use the built in pomodoro timer to help them stay on task and also take breaks as needed. 
 
-| ![starters.jpg](https://i.imgur.com/YgOYDXD.png) |
+| ![starters.jpg](https://i.imgur.com/paTv9zN.gif) |
 |:--:|
 | <b>The 3 starter prodos and their evolutions</b>|
 
@@ -18,13 +18,13 @@ As the user completes assignments on a platform such as Google Classroom, their 
 
 | ![space-1.jpg](https://i.imgur.com/P53crNN.png) |
 |:--:|
-| <b>Confetti and XP Gain on Google Classroom assingment submission</b>|
+| <b>Confetti and XP Gain on Google Classroom assignment submission</b>|
 
 #Installation instructions
 
-1.Clone repo
-2.Go to extensions manager in chrome and enable developer mode
-3.Click "Load Unpacked" (top left) , select the prodo folder, select the "dist" subfolder
+1. Clone repo
+2. Go to extensions manager in chrome and enable developer mode
+3. Click "Load Unpacked" (top left) , select the prodo folder, select the "dist" subfolder
 
 #Current Status
 
