@@ -62,18 +62,5 @@ document.onclick = function (event) {
     const back = document.getElementsByClassName("NBxL9e")[0];
     back.style.display = "none";
     jsConfetti.addConfetti();
-
-    const animation = [
-      { fontSize: "10px", opacity: "100%" },
-      { fontSize: "80px", top: "40%" },
-      { fontSize: "10px", opacity: "0%", top: "30%" },
-    ];
-
-    const animationDuration = {
-      duration: 1000,
-      iterations: 1,
-    };
-
-    document.getElementById("xp_message").animate(animation, animationDuration);
   }
 };
